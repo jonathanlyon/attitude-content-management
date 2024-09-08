@@ -4,18 +4,21 @@ services:
     build: .
     ports:
       - 8055:8055
-    volumes:
-      - ./database:/directus/database
-      - ./uploads:/directus/uploads
-      - ./extensions:/directus/extensions
     environment:
-      SECRET: "010385e92091604bf4b39c77f9c09e5e21ebc3931800077cea16153c25fce2b4"
-      ADMIN_EMAIL: "jonathan+attitude@co-defy.co"
-      ADMIN_PASSWORD: "attitude!@"
-      DB_CLIENT: "sqlite3"
-      DB_FILENAME: "/directus/database/data.db"
-      WEBSOCKETS_ENABLED: "true"
+      SECRET: "${SECRET}"
+      ADMIN_EMAIL: "${ADMIN_EMAIL}"
+      ADMIN_PASSWORD: "${ADMIN_PASSWORD}"
+      DB_CLIENT: "pg"
+      DB_HOST: ${PGHOST}            # Use Railway's value (or fill in if empty)
+      DB_PORT: ${PGPORT}            # Use Railway's value (or fill in if empty)
+      DB_DATABASE: ${POSTGRES_DB}   # From Railway's `POSTGRES_DB` variable
+      DB_USER: ${POSTGRES_USER}     # From Railway's `POSTGRES_USER` variable
+      DB_PASSWORD: ${POSTGRES_PASSWORD} # From Railway's `POSTGRES_PASSWORD` variable
+      WEBSOCKETS_ENABLED: "true"    # Enable WebSockets
       CONTENT_SECURITY_POLICY_DIRECTIVES__FRAME_SRC: "https://www.youtube-nocookie.com,https://player.vimeo.com"
       CONTENT_SECURITY_POLICY_DIRECTIVES__SCRIPT_SRC: "'self',player.vimeo.com,'unsafe-eval',www.youtube.com,'unsafe-eval',www.youtube.com/iframe_api,'unsafe-eval'"
       CONTENT_SECURITY_POLICY_DIRECTIVES__IMG_SRC: "'self',data:,i.ytimg.com,'unsafe-eval'"
       CONTENT_SECURITY_POLICY_DIRECTIVES__MEDIA_SRC: "'self',cdn.plyr.io"
+    volumes:
+      - ./uploads:/directus/uploads
+      - ./extensions:/directus/extensions

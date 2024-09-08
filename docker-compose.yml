@@ -1,24 +1,11 @@
-version: "3"
+version: "3.8"
 services:
   directus:
     build: .
     ports:
       - 8055:8055
-    environment:
-      SECRET: "${SECRET}"
-      ADMIN_EMAIL: "${ADMIN_EMAIL}"
-      ADMIN_PASSWORD: "${ADMIN_PASSWORD}"
-      DB_CLIENT: "pg"
-      DB_HOST: ${PGHOST}            # Use Railway's value (or fill in if empty)
-      DB_PORT: ${PGPORT}            # Use Railway's value (or fill in if empty)
-      DB_DATABASE: ${POSTGRES_DB}   # From Railway's `POSTGRES_DB` variable
-      DB_USER: ${POSTGRES_USER}     # From Railway's `POSTGRES_USER` variable
-      DB_PASSWORD: ${POSTGRES_PASSWORD} # From Railway's `POSTGRES_PASSWORD` variable
-      WEBSOCKETS_ENABLED: "true"    # Enable WebSockets
-      CONTENT_SECURITY_POLICY_DIRECTIVES__FRAME_SRC: "https://www.youtube-nocookie.com,https://player.vimeo.com"
-      CONTENT_SECURITY_POLICY_DIRECTIVES__SCRIPT_SRC: "'self',player.vimeo.com,'unsafe-eval',www.youtube.com,'unsafe-eval',www.youtube.com/iframe_api,'unsafe-eval'"
-      CONTENT_SECURITY_POLICY_DIRECTIVES__IMG_SRC: "'self',data:,i.ytimg.com,'unsafe-eval'"
-      CONTENT_SECURITY_POLICY_DIRECTIVES__MEDIA_SRC: "'self',cdn.plyr.io"
+    env_file:
+      - .env
     volumes:
       - ./uploads:/directus/uploads
       - ./extensions:/directus/extensions

@@ -5,3 +5,4 @@ RUN corepack enable
 USER node
 
 RUN pnpm install @directus-labs/video-player-interface
+RUN pnpm install @jonathanlyon/co-defy-video-interface

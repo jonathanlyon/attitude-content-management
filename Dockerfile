@@ -1,10 +1,12 @@
+# Use the base Directus image
 FROM directus/directus:11.1.0
 
+# Switch to root to install packages
 USER root
-RUN corepack enable
-USER node
 
-RUN pnpm install @directus-labs/video-player-interface
+# Enable corepack (pnpm) and install git
+RUN corepack enable
+RUN apk add --no-cache git
 
 # Clone the co-defy-video-interface extension from your GitHub repository
 RUN git clone https://github.com/jonathanlyon/co-defy-video-interface.git /directus/extensions/interfaces/co-defy-video-interface
@@ -13,5 +15,11 @@ RUN git clone https://github.com/jonathanlyon/co-defy-video-interface.git /direc
 WORKDIR /directus/extensions/interfaces/co-defy-video-interface
 RUN pnpm install
 
-# Back to the Directus root folder
+# Return to Directus root folder
 WORKDIR /directus
+
+# Install Directus dependencies
+RUN pnpm install
+
+# Switch back to the node user for security
+USER node

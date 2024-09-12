@@ -8,4 +8,3 @@ services:
     volumes:
       - ./uploads:/directus/uploads
       - ./extensions:/directus/extensions
-      - ./custom-extension:/directus/extensions/co-defy-video-player

@@ -4,4 +4,5 @@ USER root
 RUN corepack enable
 USER node
 
-RUN pnpm install co-defy-video-player
+# RUN pnpm install @directus-labs/video-player-interface
+RUN pnpm install co-defy-video-player-02

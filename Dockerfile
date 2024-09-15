@@ -9,3 +9,4 @@ USER node
 #RUN pnpm install simple_yt_vp
 RUN pnpm install co-defy-labs-video-interface
 RUN pnpm install image-display-from-url
+RUN pnpm install @directus/storage-driver-cloudinary

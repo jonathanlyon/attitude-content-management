@@ -8,3 +8,4 @@ USER node
 # RUN pnpm install co-defy-video-player-02
 #RUN pnpm install simple_yt_vp
 RUN pnpm install co-defy-labs-video-interface
+RUN pnpm install image-display-from-url
